@@ -1,6 +1,8 @@
 services:
   - docker
 language: bash
+before_install:
+  - chmod +x deployment/build_all.sh
 jobs:
   include:
     - stage: build docker image
