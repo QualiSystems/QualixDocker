@@ -1,4 +1,6 @@
 
+https://travis-ci.com/reubinoff/temp.svg?branch=master
+
 
 Development:
 1) build - build docker image
