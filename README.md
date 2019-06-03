@@ -1,5 +1,5 @@
 
-https://travis-ci.com/reubinoff/temp.svg?branch=master
+[![Build Status](https://travis-ci.com/reubinoff/temp.svg?branch=master)](https://travis-ci.com/reubinoff/temp)
 
 
 Development:
