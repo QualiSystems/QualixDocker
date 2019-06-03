@@ -1,6 +1,6 @@
 services:
   - docker
-
+language: bash
 jobs:
   include:
     - stage: build docker image
