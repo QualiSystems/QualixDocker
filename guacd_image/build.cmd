@@ -1,0 +1,1 @@
+docker build -t quali/qualix_guacd .

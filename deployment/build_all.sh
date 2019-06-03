@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echoerr()( echo $@|sed $'s,.*,\e[31m&\e[m,'>&2)3>&1
+echok()( echo $@|sed $'s,.*,\e[32m&\e[m,'>&2)3>&1
+
+function setError {
+    echoerr "Building $1 image Failed! please check $1 log"
+}
+
+STEP=guacamole
+
+echo Building $STEP
+
+cd ../guacamole_image
+
+./build.sh > guacamole_image.log
+if [ $? -ne 0 ]; then
+    setError $IMAGE
+    exit 1
+fi
+cd - > /dev/null 2>&1
+
+STEP=quacd
+echo Building $STEP
+cd ../guacd_image
+./build.sh > guacd_image.log
+if [ $? -ne 0 ]; then
+    setError $IMAGE
+    exit 1
+fi
+cd - > /dev/null 2>&1
+
+echok Building images succeeded
+exit 0
