@@ -12,9 +12,7 @@ jobs:
       - ./deployment/build_all.sh
       - docker images
       - ./scripts/verify_build.sh
-      if: branch = master
       - ./scripts/verify_build.sh
     - stage: test
-      if: branch = master
       script: 
       - docker run --rm qualitesthub/qualix_guacd:latest echo "done"
