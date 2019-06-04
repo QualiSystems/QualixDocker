@@ -1,12 +1,11 @@
 services:
   - docker
 language: bash
-before_install:
-  - chmod +x deployment/build_all.sh
+
 jobs:
   include:
     - stage: build docker image
       script:
       - ./deployment/build_all.sh
     - stage: test build
-      script: ./scripts//verify_build.sh
+      script: ./scripts/verify_build.sh
