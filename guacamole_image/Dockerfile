@@ -32,6 +32,5 @@ RUN echo "auth-provider: net.sourceforge.guacamole.net.auth.quali.QualiProvider"
 
 ##########################################################################################################################################
 
-RUN touch a.txt
 
 EXPOSE 8090 8443

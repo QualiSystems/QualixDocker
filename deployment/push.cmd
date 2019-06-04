@@ -1,6 +1,5 @@
 @echo off
 
-SET BASE_REPO=quali
 SET QUACD=qualix_guacd
 SET GIACAMOLE=qualix_guacamole
 
@@ -14,8 +13,8 @@ SET REPO=qualitesthub
 REM Tagging the images
 SET QUACD_TAG=%REPO%/%QUACD%:%VERSION%
 SET GIACAMOLE_TAG=%REPO%/%GIACAMOLE%:%VERSION%
-docker tag %BASE_REPO%/%QUACD%:latest %REPO%/%QUACD%:%VERSION%
-docker tag %BASE_REPO%/%GIACAMOLE%:latest %REPO%/%GIACAMOLE%:%VERSION%
+docker tag %QUACD%:latest %REPO%/%QUACD%:%VERSION%
+docker tag %GIACAMOLE%:latest %REPO%/%GIACAMOLE%:%VERSION%
 
 
 REM Login to Docker

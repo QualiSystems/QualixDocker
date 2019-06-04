@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t quali/qualix_guacd .
+docker build -t qualix_guacd .
 

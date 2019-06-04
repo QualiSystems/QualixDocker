@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
   guacamole:
-    image: quali/qualix_guacamole:1.0
+    image: qualitesthub/qualix_guacamole:$TAG_GUACAMOLE
     container_name: guacamole
     networks:
       - qxnetwork
@@ -18,7 +18,7 @@ services:
       - 8443:443
 
   guacd:
-    image: quali/qualix_guacd:1.0
+    image: qualitesthub/qualix_guacd:$TAG_GUACD
     container_name: guacd
     networks:
       - qxnetwork

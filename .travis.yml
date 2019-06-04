@@ -7,9 +7,11 @@ branches:
   - master
   - develop
 
+before_install:
+  - source .prod.env
+
 env:
   global:
-    - BASE_REPO=quali
     - BASE_VERSION=1.0
 
 
@@ -17,8 +19,8 @@ script:
   - ./deployment/build_all.sh
   - docker images
   - ./scripts/verify_build.sh
-  - docker run --rm $BASE_REPO/qualix_guacd echo "done"
-  - docker run --rm $BASE_REPO/qualix_guacamole echo "done"
+  - docker run --rm qualix_guacd echo "done"
+  - docker run --rm qualix_guacamole echo "done"
 
 deploy:
   provider: script

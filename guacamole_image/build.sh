@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t quali/qualix_guacamole .
+docker build -t qualix_guacamole .
 
