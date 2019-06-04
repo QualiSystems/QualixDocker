@@ -1,6 +1,6 @@
 FROM guacamole/guacamole:1.0.0
 
-LABEL maintainer="Support@Quali.com" url="https://support.quali.com"
+LABEL maintainer="Support@quali.com" url="https://support.quali.com"
 
 ######################## ENV VARS ##############################################################################################
 ENV GUACAMOLE_HOME_DIR=/opt/guacamole/.guacamole
