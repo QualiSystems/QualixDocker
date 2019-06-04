@@ -4,8 +4,14 @@ language: bash
 
 jobs:
   include:
-    - stage: build docker image
+    - stage: build and deploy docker image
       script:
       - ./deployment/build_all.sh
+      if: branch = master
+      - ./scripts/verify_build.sh
     - stage: test build
       script: ./scripts/verify_build.sh
+    - stage: test
+      if: branch = master
+      script: 
+      - docker run --rm qualitesthub/qualix_guacd:latest echo "done"
