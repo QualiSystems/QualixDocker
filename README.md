@@ -12,3 +12,7 @@ Deployment:
 1) build_all - build all docker images
 2) push - push the images to repository
 
+
+Qualix Getting Started:
+- https://support.quali.com/hc/en-us/articles/231607307-QualiX-Getting-Started-Guide
+

@@ -3,7 +3,6 @@ version: "3.0"
 services:
   guacamole:
     image: qualitesthub/qualix_guacamole:$TAG_GUACAMOLE
-    container_name: guacamole
     networks:
       - qxnetwork
     depends_on:
@@ -13,14 +12,13 @@ services:
       - GUACD_HOSTNAME=guacd
       - GUACD_PORT=4822
     ports:
-      - 8090:80
-      - 8088:8080
-      - 8443:443
-    volume:
-      - ./files:${GUACAMOLE_HOME}/files
+      - ${PORT_80}:80
+      - ${PORT_8080}:8080
+      - ${PORT_443}:443
+    volumes:
+      - files:${GUACAMOLE_HOME}/files
   guacd:
     image: qualitesthub/qualix_guacd:$TAG_GUACD
-    container_name: guacd
     networks:
       - qxnetwork
     environment:
