@@ -12,7 +12,8 @@ jobs:
       - ./deployment/build_all.sh
       - docker images
       - ./scripts/verify_build.sh
-      - ./scripts/verify_build.sh
+      - ./deployment/push.sh
     - stage: test
       script: 
-      - docker run --rm qualitesthub/qualix_guacd:latest echo "done"
+      - docker run --rm $DOCKER_USERNAME/qualix_guacd:latest echo "done"
+      - docker run --rm $DOCKER_USERNAME/qualix_guacamole:latest echo "done"
