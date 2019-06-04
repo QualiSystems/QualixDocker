@@ -9,16 +9,18 @@ branches:
 
 env:
   global:
-    - VERSION="1.0."$TRAVIS_BUILD_NUMBER
-jobs:
-  include:
-    - stage: build and deploy docker image
-      script:
-      - ./deployment/build_all.sh
-      - docker images
-      - ./scripts/verify_build.sh
-      - ./deployment/push.sh
-    - stage: test
-      script: 
-      - docker run --rm $DOCKER_USERNAME/qualix_guacd:$VERSION echo "done"
-      - docker run --rm $DOCKER_USERNAME/qualix_guacamole:$VERSION echo "done"
+    - BASE_REPO=quali
+
+
+script:
+  - ./deployment/build_all.sh
+  - docker images
+  - ./scripts/verify_build.sh
+  - docker run --rm $BASE_REPO/qualix_guacd echo "done"
+  - docker run --rm $BASE_REPO/qualix_guacamole echo "done"
+
+deploy:
+  provider: script
+  script: ./deployment/push.sh $TRAVIS_BUILD_NUMBER
+  on:
+    branch: master

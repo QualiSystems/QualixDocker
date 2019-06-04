@@ -2,7 +2,6 @@
 
 echoerr()( echo $@|sed $'s,.*,\e[31m&\e[m,'>&2)3>&1
 echok()( echo $@|sed $'s,.*,\e[32m&\e[m,'>&2)3>&1
-echo()( echo $@|sed $'s,.*,\e[33m&\e[m,'>&2)3>&1
 
 function setError {
     echoerr "Pushing $1 image Failed! please check $1 log"
@@ -21,15 +20,17 @@ function push {
     fi
 }
 
+if [ "$1" != "" ]; then
+    VERSION=$1
+else
+    VERSION=1.0.0
+fi
+echo Using build number: $VERSION
+
 BASE_REPO=quali
 QUACD=qualix_guacd
 GIACAMOLE=qualix_guacamole
-NAME=moshe_name
 
-if [ -z "$VERSION" ]
-then
-    VERSION=1.0.0
-fi
 
 if [ -z "$DOCKER_USERNAME" ]
 then
@@ -43,13 +44,6 @@ then
 fi
 
 
-# Tagging the images
-QUACD_TAG=$DOCKER_USERNAME/$QUACD:$VERSION
-GIACAMOLE_TAG=$DOCKER_USERNAME/$GIACAMOLE:$VERSION
-
-docker tag $BASE_REPO/$QUACD:latest $QUACD_TAG
-docker tag $BASE_REPO/$GIACAMOLE:latest $GIACAMOLE_TAG
-
 
 # Login to Docker
 echo Login to docker hub with username: $DOCKER_USERNAME
@@ -58,6 +52,15 @@ if [ $? -ne 0 ]; then
     echoerr failed to Login to docker hub repo
     exit 1
 fi
+
+
+# Tagging the images
+QUACD_TAG=$DOCKER_USERNAME/$QUACD:$VERSION
+GIACAMOLE_TAG=$DOCKER_USERNAME/$GIACAMOLE:$VERSION
+
+docker tag $BASE_REPO/$QUACD:latest $QUACD_TAG
+docker tag $BASE_REPO/$GIACAMOLE:latest $GIACAMOLE_TAG
+
 
 # pushing the images
 push $QUACD_TAG
