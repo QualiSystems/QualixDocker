@@ -2,9 +2,14 @@ services:
   - docker
 language: bash
 
+branches:
+  only:
+  - master
+  - develop
+
 env:
   global:
-    - VERSION="1.0."$TRAVIS_JOB_ID
+    - VERSION="1.0."$TRAVIS_BUILD_NUMBER
 jobs:
   include:
     - stage: build and deploy docker image
@@ -15,5 +20,5 @@ jobs:
       - ./deployment/push.sh
     - stage: test
       script: 
-      - docker run --rm $DOCKER_USERNAME/qualix_guacd:latest echo "done"
-      - docker run --rm $DOCKER_USERNAME/qualix_guacamole:latest echo "done"
+      - docker run --rm $DOCKER_USERNAME/qualix_guacd:$VERSION echo "done"
+      - docker run --rm $DOCKER_USERNAME/qualix_guacamole:$VERSION echo "done"
