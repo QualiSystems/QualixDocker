@@ -16,7 +16,8 @@ services:
       - 8090:80
       - 8088:8080
       - 8443:443
-
+    volume:
+      - ./files:${GUACAMOLE_HOME}/files
   guacd:
     image: qualitesthub/qualix_guacd:$TAG_GUACD
     container_name: guacd
@@ -27,4 +28,7 @@ services:
 
 networks:
   qxnetwork:
+
+volumes:
+  files:
 

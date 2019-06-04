@@ -2,14 +2,21 @@ FROM guacamole/guacamole:1.0.0
 
 LABEL maintainer="Support@quali.com" url="https://support.quali.com"
 
+
+
 ######################## ENV VARS ##############################################################################################
-ENV GUACAMOLE_HOME_DIR=/opt/guacamole/.guacamole
+ENV GUACAMOLE_HOME_DIR /opt/guacamole/.guacamole
+ENV GUACAMOLE_PROPERTIES guacamole.properties
+
 
 ENV QUALIX_S3_AUTH_FILE="qualix-0.9.10.tar.gz"
 ENV QUALIX_S3_URL=https://s3.amazonaws.com/quali-prod-binaries/${QUALIX_S3_AUTH_FILE}
 
 ENV QUALIX_GUACAMOLE_VERSION="0.9.10-incubating"
 ENV QUALIX_AUTH_PACK_NAME=guacamole-auth-quali-${QUALIX_GUACAMOLE_VERSION}
+
+ENV HTTP_PORT 80
+ENV HTTPS_PORT 443
 ##########################################################################################################################################
 
 
@@ -28,7 +35,10 @@ RUN rm -r ${QUALIX_AUTH_PACK_NAME}
 
 
 ######################## Copy configuration ##############################################################################################
-RUN echo "auth-provider: net.sourceforge.guacamole.net.auth.quali.QualiProvider"  > /opt/guacamole/guacamole.properties
+RUN echo "auth-provider: net.sourceforge.guacamole.net.auth.quali.QualiProvider"  > ${GUACAMOLE_HOME_DIR}/${GUACAMOLE_PROPERTIES}
+RUN mkdir -p ${GUACAMOLE_HOME_DIR}/files/
+RUN chmod -R 777 ${GUACAMOLE_HOME_DIR}/
+RUN chmod -R 777 ${GUACAMOLE_HOME_DIR}/files/
 
 ##########################################################################################################################################
 
