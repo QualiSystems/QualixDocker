@@ -1,5 +1,8 @@
 #!/bin/bash
 
+EXEC_DIR=$(dirname "${BASH_SOURCE[0]}")
+cd "$EXEC_DIR" # go to ref dir
+
 echoerr()( echo $@|sed $'s,.*,\e[31m&\e[m,'>&2)3>&1
 echok()( echo $@|sed $'s,.*,\e[32m&\e[m,'>&2)3>&1
 
@@ -8,9 +11,7 @@ function setError {
 }
 
 STEP=guacamole
-
 echo Building $STEP
-
 cd ../guacamole_image
 
 ./build.sh > guacamole_image.log
