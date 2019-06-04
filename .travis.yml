@@ -2,15 +2,18 @@ services:
   - docker
 language: bash
 
+env:
+  global:
+    - VERSION="1.0."$TRAVIS_JOB_ID
 jobs:
   include:
     - stage: build and deploy docker image
       script:
       - ./deployment/build_all.sh
+      - docker images
+      - ./scripts/verify_build.sh
       if: branch = master
       - ./scripts/verify_build.sh
-    - stage: test build
-      script: ./scripts/verify_build.sh
     - stage: test
       if: branch = master
       script: 
