@@ -23,7 +23,7 @@ function push {
 if [ "$1" != "" ]; then
     VERSION=$1
 else
-    VERSION=1.0.0
+    VERSION=0.9.0
 fi
 echo Using build number: $VERSION
 
@@ -49,6 +49,7 @@ echo Login to docker hub with username: $DOCKER_USERNAME
 docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD > /dev/null 2>&1
 if [ $? -ne 0 ]; then
     echoerr failed to Login to docker hub repo
+    docker logout
     exit 1
 fi
 
@@ -75,5 +76,6 @@ push $GIACAMOLE_TAG_LATEST
 
 
 done_push
+docker logout
 exit 0 
 
