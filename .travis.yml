@@ -8,7 +8,7 @@ branches:
   - develop
 
 before_install:
-  - source config/.prod.env
+  - source config/.dev.env
 
 env:
   global:
