@@ -32,4 +32,5 @@ fi
 cd - > /dev/null 2>&1
 
 echok Building images succeeded
+docker images | grep qual
 exit 0
