@@ -20,6 +20,7 @@ function push {
     fi
 }
 
+# build number for the image tag
 if [ "$1" != "" ]; then
     VERSION=$1
 else

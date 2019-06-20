@@ -7,7 +7,8 @@ ENV GUACAMOLE_HOME /opt/guacamole/.guacamole
 ENV GUACAMOLE_PROPERTIES guacamole.properties
 
 
-ENV QUALIX_S3_AUTH_FILE qualix-0.9.10.tar.gz
+ENV VERSION qualix-0.9.10
+ENV QUALIX_S3_AUTH_FILE ${VERSION}.tar.gz
 ENV QUALIX_S3_URL https://s3.amazonaws.com/quali-prod-binaries/${QUALIX_S3_AUTH_FILE}
 
 ENV QUALIX_GUACAMOLE_VERSION 0.9.10-incubating
@@ -30,10 +31,16 @@ RUN sed -i '/<Service name="Catalina">/a <Connector port="8443" protocol="org.ap
 
 ######################## Get quali qualix package from S3 #################################################################################
 RUN mkdir -p ${GUACAMOLE_HOME}/extensions 
-# RUN wget -qO- ${QUALIX_S3_URL} | tar -xzf - 
-COPY qualix-1.0.0.tar.gz /tmp
 
-RUN tar -xzf /tmp/qualix-1.0.0.tar.gz
+## For PRODUCTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+RUN wget -qO- ${QUALIX_S3_URL} | tar -xzf - 
+## For DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# COPY qualix-1.0.0.tar.gz /tmp
+# RUN tar -xzf /tmp/qualix-1.0.0.tar.gz
+## For DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 RUN cp guacamole-auth-quali-1.0.0/guacamole-auth-quali-1.0.0.jar ${GUACAMOLE_HOME}/extensions/
 RUN rm -rf  guacamole-auth-quali-1.0.0
 # RUN cp ${QUALIX_AUTH_PACK_NAME}/${QUALIX_AUTH_PACK_NAME}.jar ${GUACAMOLE_HOME}/extensions/
