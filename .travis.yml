@@ -7,11 +7,6 @@ branches:
   - master
   - develop
 
-before_install:
-  - source config/.dev.env
-
-
-
 script:
   - ./deployment/build_all.sh
   - docker images
