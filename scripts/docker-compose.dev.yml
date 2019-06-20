@@ -12,8 +12,8 @@ services:
       - GUACD_HOSTNAME=guacd
       - GUACD_PORT=4822
     ports:
-      - ${PORT_8080}:8080
-      - ${PORT_8443}:8443
+      - 8080:8080
+      - 443:8443
     volumes:
       - files:${GUACAMOLE_HOME}/files
     networks:

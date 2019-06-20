@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#script for development purpose to take the new JAR instead the JAr from S3
+
+
 SOURCE="/source"
 PATH_OF_JAR=$SOURCE/RnDTools/QualiX/guacamole-auth-quali/target
 TMP_PATH=/tmp/guac

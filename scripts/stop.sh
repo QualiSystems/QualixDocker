@@ -1,10 +1,8 @@
 #!/bin/bash
 
-STACK_NAME=qualix
-docker stack rm $STACK_NAME
+docker-compose down
 
-
-total_instances=$(docker ps | grep $STACK_NAME | wc -l)
+total_instances=$(docker ps | grep quali | wc -l)
 while [ "$total_instances" -ne "0" ]
 do
     total_instances=$(docker ps | grep $STACK_NAME | wc -l)
@@ -12,6 +10,6 @@ do
     printf .
 done
 
-echo $STACK_NAME stack removed!
+echo $STACK_NAME containers removed!
 
 

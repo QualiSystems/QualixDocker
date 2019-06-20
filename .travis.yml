@@ -10,9 +10,6 @@ branches:
 before_install:
   - source config/.dev.env
 
-env:
-  global:
-    - BASE_VERSION=1.0
 
 
 script:
@@ -24,6 +21,6 @@ script:
 
 deploy:
   provider: script
-  script: ./deployment/push.sh $BASE_VERSION.$TRAVIS_BUILD_NUMBER
+  script: ./deployment/push.sh $version
   on:
     branch: master

@@ -8,24 +8,28 @@ services:
     depends_on:
       - guacd
     environment:
-      GUACAMOLE_HOME: /opt/guacamole/.guacamole
-      GUACD_HOSTNAME: guacd
-      GUACD_PORT: 4822
+      - GUACAMOLE_HOME=/opt/guacamole/.guacamole
+      - GUACD_HOSTNAME=guacd
+      - GUACD_PORT=4822
     ports:
-      - ${PORT_80}:80
-      - ${PORT_8080}:8080
-      - ${PORT_8443}:443
+      - 80:8080
+      - 443:8443
     volumes:
       - files:${GUACAMOLE_HOME}/files
+     networks:
+      guacnetwork_compose:
+    restart: always
   guacd:
     image: qualitesthub/qualix_guacd:${TAG_GUACD}
     hostname: guacd
     container_name: guacd
-    environment:
-      - GUACD_LOG_LEVEL=debug
     ports:
       - 4822:4822
+    networks:
+      guacnetwork_compose:
 
+networks:
+  guacnetwork_compose:
+    driver: bridge
 volumes:
   files:
-

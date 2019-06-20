@@ -6,21 +6,20 @@ else
     STACK_FILE=docker-compose.yml
 fi
 
-echo "Running on stack from file: $STACK_FILE"
+echo "Running from file: $STACK_FILE"
 
-STACK_NAME=qualix
-docker stack deploy --compose-file $STACK_FILE $STACK_NAME
+docker-compose -f $STACK_FILE $STACK_NAME up
 
 echo
-sleep 2
+sleep 3
 total_instances=$(docker ps | grep qualix_ | wc -l)
 if [ "$total_instances" -ne "2" ];
 then
-    echo  $STACK_NAME stack Failed to start
+    echo  $STACK_NAME containers Failed to start
     exit 1
 fi
 
-echo $STACK_NAME stack deployed!
+echo $STACK_NAME containers deployed!
 
 echo -----------------------------------------
 quacamole_id=$(docker ps | grep  qualix_guacamole | awk '{print $1}')
