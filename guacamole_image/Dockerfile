@@ -62,10 +62,3 @@ RUN chmod -R 777 ${GUACAMOLE_HOME}/files/
 
 RUN  mv /opt/guacamole/guacamole.war /opt/guacamole/${GUACAMOLE_WAR_NAME}.war
 RUN ln -s /opt/guacamole/${GUACAMOLE_WAR_NAME}.war /usr/local/tomcat/webapps/${GUACAMOLE_WAR_NAME}.war
-
-
-
-RUN apt-get update
-RUN apt-get install -y  sysv-rc-conf
-RUN sysv-rc-conf --level 234 tomcat on
-RUN apt-get install -y vim
