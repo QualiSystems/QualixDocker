@@ -6,13 +6,13 @@ LABEL maintainer="Support@quali.com" url="https://support.quali.com"
 ENV GUACAMOLE_HOME /opt/guacamole/.guacamole
 ENV GUACAMOLE_PROPERTIES guacamole.properties
 
-
-ENV VERSION qualix-0.9.10
+# ARG of the JAR version
+ARG JAR_VERSION=1.0.0
+ENV VERSION qualix-${JAR_VERSION}
 ENV QUALIX_S3_AUTH_FILE ${VERSION}.tar.gz
 ENV QUALIX_S3_URL https://s3.amazonaws.com/quali-prod-binaries/${QUALIX_S3_AUTH_FILE}
 
-ENV QUALIX_GUACAMOLE_VERSION 0.9.10-incubating
-ENV QUALIX_AUTH_PACK_NAME guacamole-auth-quali-${QUALIX_GUACAMOLE_VERSION}
+ENV QUALIX_AUTH_PACK_NAME guacamole-auth-quali-${VERSION}
 
 ENV KEYSTORE_PASS 123123
 ENV GUACAMOLE_WAR_NAME remote
@@ -33,6 +33,7 @@ RUN sed -i '/<Service name="Catalina">/a <Connector port="8443" protocol="org.ap
 RUN mkdir -p ${GUACAMOLE_HOME}/extensions 
 
 ## For PRODUCTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+RUN echo ${QUALIX_S3_URL}
 RUN wget -qO- ${QUALIX_S3_URL} | tar -xzf - 
 ## For DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # COPY qualix-1.0.0.tar.gz /tmp

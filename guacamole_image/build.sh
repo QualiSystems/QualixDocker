@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t qualix_guacamole .
+docker build --build-arg JAR_VERSION=$jar_version -t qualix_guacamole .
 
