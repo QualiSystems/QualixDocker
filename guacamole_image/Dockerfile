@@ -42,8 +42,8 @@ RUN wget -qO- ${QUALIX_S3_URL} | tar -xzf -
 
 
 
-RUN cp guacamole-auth-quali-1.0.0/guacamole-auth-quali-1.0.0.jar ${GUACAMOLE_HOME}/extensions/
-RUN rm -rf  guacamole-auth-quali-1.0.0
+RUN cp guacamole-auth-quali-${JAR_VERSION}/guacamole-auth-quali-${JAR_VERSION}.jar ${GUACAMOLE_HOME}/extensions/
+RUN rm -rf  guacamole-auth-quali-${JAR_VERSION}
 # RUN cp ${QUALIX_AUTH_PACK_NAME}/${QUALIX_AUTH_PACK_NAME}.jar ${GUACAMOLE_HOME}/extensions/
 # RUN rm -r ${QUALIX_AUTH_PACK_NAME}
 

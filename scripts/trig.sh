@@ -18,7 +18,13 @@ else
     JAR_VERSION=0.0.0
 fi
 if [ "$3" != "" ]; then
-    TOKEN=$3
+    BUCKET_NAME=$3
+else
+    BUCKET_NAME="quali-prod_binaries"
+fi
+
+if [ "$4" != "" ]; then
+    TOKEN=$4
 else
     TOKEN="NONE"
 fi
@@ -33,7 +39,8 @@ body='{
     "config": {
         "env": {
             "version": "'${VERSION}'",
-            "jar_version": "'${JAR_VERSION}'"
+            "jar_version": "'${JAR_VERSION}'",
+            "bucket_name": "'${BUCKET_NAME}'"
         }
     }
 }}'
