@@ -19,9 +19,10 @@ deploy:
     script: ./deployment/push.sh $version
     on:
       branch: master
-  - provider: s3
-    before_deploy:
+    after_deploy:
     - ./scripts/create_tar_package.sh /tmp/$TRAVIS_BUILD_ID
+    skip_cleanup: true
+  - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET
     bucket: $bucket_name
