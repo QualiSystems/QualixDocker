@@ -13,15 +13,13 @@ script:
   - ./scripts/verify_build.sh
   - docker run --rm qualix_guacd echo "done"
   - docker run --rm qualix_guacamole echo "done"
+  - ./scripts/create_tar_package.sh /tmp/$TRAVIS_BUILD_ID
 
 deploy:
   - provider: script
     script: ./deployment/push.sh $version
     on:
       branch: master
-    after_deploy:
-    - ./scripts/create_tar_package.sh /tmp/$TRAVIS_BUILD_ID
-    skip_cleanup: true
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET
