@@ -5,6 +5,7 @@
 # the script guacamole-quali-install-docker.sh will install this tar on the relevant host
 
 # file parameter
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 if [ "$1" != "" ]; then
     TMP_PATH=$1
 else
@@ -26,11 +27,13 @@ tar cvf $TAR_PATH --files-from /dev/null
 echo "tar file created!"
 FILES=(docker-compose.yml start.sh stop.sh status.sh)
 
+cd $DIR
 for _file in "${FILES[@]}";
 do
     echo Adding file "$_file" to tar file
-    tar rvf $TAR_PATH "$_file"
+    tar rvf $TAR_PATH $_file
 done
+cd -
 
 total_files=$(tar -tf $TAR_PATH | wc -l)
 echo "the tar file contains $total_files files"
