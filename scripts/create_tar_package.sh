@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ########################################################################################
 # this script create tart file with all the relevant files to run the docker container
