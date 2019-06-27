@@ -15,7 +15,19 @@ script:
   - docker run --rm qualix_guacamole echo "done"
 
 deploy:
-  provider: script
-  script: ./deployment/push.sh $version
-  on:
-    branch: master
+  - provider: script
+    script: ./deployment/push.sh $version
+    on:
+      branch: master
+  - provider: s3
+    before_deploy:
+    - ./scripts/create_tar_package.sh /tmp/$TRAVIS_BUILD_ID
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET
+    bucket: $bucket_name
+    skip_cleanup: true
+    acl: public_read
+    region: us-east-1
+    local_dir: /tmp/$TRAVIS_BUILD_ID
+    on:
+      branch: master
