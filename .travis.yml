@@ -9,7 +9,7 @@ branches:
 
 env:
   global:
-    - TAR_PATH: $TRAVIS_BUILD_DIR
+    - TAR_PATH=$TRAVIS_BUILD_DIR
 
 script:
   - ./deployment/build_all.sh
@@ -17,7 +17,7 @@ script:
   - ./scripts/verify_build.sh
   - docker run --rm qualix_guacd echo "done"
   - docker run --rm qualix_guacamole echo "done"
-  - ./scripts/create_tar_package.sh $TAR_PATH/$TRAVIS_BUILD_ID
+  - echo $TAR_PATH/$TRAVIS_BUILD_ID && ./scripts/create_tar_package.sh $TAR_PATH/$TRAVIS_BUILD_ID
 
 deploy:
   - provider: script
