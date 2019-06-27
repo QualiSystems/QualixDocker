@@ -6,15 +6,15 @@
 
 # file parameter
 if [ "$1" != "" ]; then
-    BUILD_NUMBER=$1
+    TMP_PATH=$1
 else
-    BUILD_NUMBER=123
+    TMP_PATH=/tmp/qualix_tar
 fi
 TAR_NAME=qualix-docker.tar
-TMP_PATH=${BUILD_NUMBER}
 TAR_PATH=${TMP_PATH}/$TAR_NAME
 GZ_PATH=${TAR_PATH}.gz
 
+echo "Starting Tar process..."
 if [ -d "$TMP_PATH" ];
 then
     echo "Deleting temp dir"
@@ -23,11 +23,12 @@ fi
 mkdir $TMP_PATH
 #create tar file
 tar cvf $TAR_PATH --files-from /dev/null
-
+echo "tar file created!"
 FILES=(docker-compose.yml start.sh stop.sh status.sh)
 
 for _file in "${FILES[@]}";
 do
+    echo Adding file "$_file" to tar file
     tar rvf $TAR_PATH "$_file"
 done
 
