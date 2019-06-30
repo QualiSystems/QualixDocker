@@ -33,20 +33,26 @@ then
 fi
 mkdir $TMP_PATH
 
-# Create versions env file
-echo "export TAG_GUACAMOLE=${VERSION}" > ${ENV_FILE}
-echo "export TAG_GUACD=${VERSION}" >> ${ENV_FILE}
-
 #create tar file
 tar cvf $TAR_PATH --files-from /dev/null
 echo "tar file created!"
 FILES=(docker-compose.yml start.sh stop.sh status.sh ${ENV_FILE})
 
 cd $DIR
+
+# Create versions env file
+echo "export TAG_GUACAMOLE=${VERSION}" > ${ENV_FILE}
+echo "export TAG_GUACD=${VERSION}" >> ${ENV_FILE}
+
+# add files to tar file
 for _file in "${FILES[@]}";
 do
     echo Adding file "$_file" to tar file
     tar rvf $TAR_PATH $_file
+    if [[ $? -ne 0 ]]; then
+        echo "Failed to add ${_file} to archive file"
+        exit 1
+    fi
 done
 cd -
 
