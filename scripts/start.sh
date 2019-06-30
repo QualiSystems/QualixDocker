@@ -13,7 +13,7 @@ echo "Running from file: $STACK_FILE"
 
 
 
-docker-compose -f $STACK_FILE $STACK_NAME up
+docker-compose -f $STACK_FILE $STACK_NAME up -d
 
 echo
 sleep 3
