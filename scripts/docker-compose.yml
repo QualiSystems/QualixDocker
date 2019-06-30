@@ -18,7 +18,7 @@ services:
       - files:${GUACAMOLE_HOME}/files
     networks:
       guacnetwork_compose:
-        restart: always
+    restart: always
   guacd:
     image: qualitesthub/qualix_guacd:${TAG_GUACD}
     hostname: guacd
