@@ -5,10 +5,13 @@ PROD_PATH=/opt/qualix
 if [ "$1" == "dev" ]; then
     STACK_FILE=docker-compose.dev.yml
 else
+    source ${PROD_PATH}/.env
     STACK_FILE=${PROD_PATH}/docker-compose.yml
 fi
 
 echo "Running from file: $STACK_FILE"
+
+
 
 docker-compose -f $STACK_FILE $STACK_NAME up
 

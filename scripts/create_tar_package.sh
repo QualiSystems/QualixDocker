@@ -23,6 +23,7 @@ fi
 TAR_NAME=qualix-docker-${VERSION}.tar
 TAR_PATH=${TMP_PATH}/$TAR_NAME
 GZ_PATH=${TAR_PATH}.gz
+ENV_FILE=.env
 
 echo "Starting Tar process..."
 if [ -d "$TMP_PATH" ];
@@ -31,10 +32,15 @@ then
     rm -rf $TMP_PATH
 fi
 mkdir $TMP_PATH
+
+# Create versions env file
+echo "export TAG_GUACAMOLE=${VERSION}" > ${ENV_FILE}
+echo "export TAG_GUACD=${VERSION}" >> ${ENV_FILE}
+
 #create tar file
 tar cvf $TAR_PATH --files-from /dev/null
 echo "tar file created!"
-FILES=(docker-compose.yml start.sh stop.sh status.sh)
+FILES=(docker-compose.yml start.sh stop.sh status.sh ${ENV_FILE})
 
 cd $DIR
 for _file in "${FILES[@]}";
