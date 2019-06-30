@@ -16,9 +16,9 @@ services:
       - 443:8443
     volumes:
       - files:${GUACAMOLE_HOME}/files
-     networks:
+    networks:
       guacnetwork_compose:
-    restart: always
+        restart: always
   guacd:
     image: qualitesthub/qualix_guacd:${TAG_GUACD}
     hostname: guacd
@@ -28,8 +28,10 @@ services:
     networks:
       guacnetwork_compose:
 
+
+volumes:
+  files:
+
 networks:
   guacnetwork_compose:
     driver: bridge
-volumes:
-  files:
