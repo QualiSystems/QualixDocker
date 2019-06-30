@@ -11,7 +11,16 @@ if [ "$1" != "" ]; then
 else
     TMP_PATH=/tmp/qualix_tar
 fi
-TAR_NAME=qualix-docker.tar
+
+if [ "$1" != "" ]; then
+    VERSION=$2
+else
+    VERSION=0.0.1
+fi
+
+
+
+TAR_NAME=qualix-docker-${VERSION}.tar
 TAR_PATH=${TMP_PATH}/$TAR_NAME
 GZ_PATH=${TAR_PATH}.gz
 
