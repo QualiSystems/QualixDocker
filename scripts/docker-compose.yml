@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
   guacamole:
-    image: qualitesthub/qualix_guacamole:${TAG_GUACAMOLE}
+    image: qualihub/qualix_guacamole:${TAG_GUACAMOLE}
     hostname: guacamole
     container_name: guacamole
     depends_on:
@@ -20,7 +20,7 @@ services:
       guacnetwork_compose:
     restart: always
   guacd:
-    image: qualitesthub/qualix_guacd:${TAG_GUACD}
+    image: qualihub/qualix_guacd:${TAG_GUACD}
     hostname: guacd
     container_name: guacd
     ports:
