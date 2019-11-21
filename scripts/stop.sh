@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /opt/qualix
 docker-compose down
 
 total_instances=$(docker ps | grep quali | wc -l)
