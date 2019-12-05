@@ -1,5 +1,5 @@
 #!/bin/bash
-EXPECTED_BUILDS=2
+EXPECTED_BUILDS=4
 results=$(docker images | grep quali | grep latest | wc -l)
 
 if [ "$results" = "$EXPECTED_BUILDS" ];

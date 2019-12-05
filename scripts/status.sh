@@ -1,5 +1,5 @@
 #!/bin/bash
-EXPECTED_BUILDS=4
+EXPECTED_BUILDS=2
 results=$(docker ps | grep quali | wc -l)
 
 
