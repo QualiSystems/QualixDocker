@@ -27,6 +27,7 @@ services:
       - 4822:4822
     networks:
       guacnetwork_compose:
+    restart: always
 
 
 volumes:
