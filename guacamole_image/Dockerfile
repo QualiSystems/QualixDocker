@@ -34,7 +34,7 @@ RUN mkdir -p ${GUACAMOLE_HOME}/extensions
 
 ## For PRODUCTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 RUN echo ${QUALIX_S3_URL}
-RUN wget -O- ${QUALIX_S3_URL}
+RUN wget -O ${QUALIX_S3_URL}
 RUN tar -xzf ${QUALIX_S3_AUTH_FILE}
 ## For DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # COPY qualix-1.0.0.tar.gz /tmp
