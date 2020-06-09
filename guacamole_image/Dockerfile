@@ -10,7 +10,7 @@ ENV GUACAMOLE_PROPERTIES guacamole.properties
 ARG JAR_VERSION=1.0.0
 ENV VERSION qualix-${JAR_VERSION}
 ENV QUALIX_S3_AUTH_FILE ${VERSION}.tar.gz
-ENV QUALIX_S3_URL https://s3.amazonaws.com/quali-dev-binaries/${QUALIX_S3_AUTH_FILE}
+ENV QUALIX_S3_URL https://quali-dev-binaries.s3.amazonaws.com/${QUALIX_S3_AUTH_FILE}
 
 ENV QUALIX_AUTH_PACK_NAME guacamole-auth-quali-${VERSION}
 
