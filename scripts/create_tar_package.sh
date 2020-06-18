@@ -41,8 +41,8 @@ FILES=(docker-compose.yml start.sh stop.sh status.sh ${ENV_FILE})
 cd $DIR
 
 # Create versions env file
-echo "export TAG_GUACAMOLE=${VERSION}" > ${ENV_FILE}
-echo "export TAG_GUACD=${VERSION}" >> ${ENV_FILE}
+echo "TAG_GUACAMOLE=${VERSION}" > ${ENV_FILE}
+echo "TAG_GUACD=${VERSION}" >> ${ENV_FILE}
 
 # add files to tar file
 for _file in "${FILES[@]}";
