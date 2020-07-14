@@ -2,7 +2,8 @@
 
 ######################################################
 #
-# run the script for example: ./push.sh 1.0.2.33
+# env var reqiored: VERSION >> for example 1.4.0.123
+# run the script for example: ./push.sh
 #
 ######################################################
 
@@ -28,11 +29,16 @@ function push {
 }
 
 # build number for the image tag
-if [ "$1" != "" ]; then
-    VERSION=$1
-else
-    echo "Version is required. please run the script with arg of version. for example: ./push.sh 1.0.2.33"
-fi
+VARS=(VERSION)
+for _var in "${VARS[@]}";
+do
+    echo "check if ${_var} exists"
+    if [[ -z "${!_var}" ]]; then
+        echoerr " enviroment var $_var doesnt exist"
+        exit 1
+    fi
+done
+
 echo Using build number: $VERSION
 
 QUACD=qualix_guacd
