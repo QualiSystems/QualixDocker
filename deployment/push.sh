@@ -1,5 +1,12 @@
 #!/bin/bash
 
+######################################################
+#
+# run the script for example: ./push.sh 1.0.2.33
+#
+######################################################
+
+
 echoerr()( echo $@|sed $'s,.*,\e[31m&\e[m,'>&2)3>&1
 echok()( echo $@|sed $'s,.*,\e[32m&\e[m,'>&2)3>&1
 
@@ -24,12 +31,12 @@ function push {
 if [ "$1" != "" ]; then
     VERSION=$1
 else
-    VERSION=0.9.0
+    echo "Version is required. please run the script with arg of version. for example: ./push.sh 1.0.2.33"
 fi
 echo Using build number: $VERSION
 
 QUACD=qualix_guacd
-GIACAMOLE=qualix_guacamole
+GUACAMOLE=qualix_guacamole
 
 
 if [ -z "$DOCKER_USERNAME" ]
@@ -59,21 +66,21 @@ fi
 QUACD_TAG_BASE=$DOCKER_USERNAME/$QUACD
 QUACD_TAG=$QUACD_TAG_BASE:$VERSION
 QUACD_TAG_LATEST=$QUACD_TAG_BASE:latest
-GIACAMOLE_TAG_BASE=$DOCKER_USERNAME/$GIACAMOLE
-GIACAMOLE_TAG=$GIACAMOLE_TAG_BASE:$VERSION
-GIACAMOLE_TAG_LATEST=$GIACAMOLE_TAG_BASE:latest
+GUACAMOLE_TAG_BASE=$DOCKER_USERNAME/$GUACAMOLE
+GUACAMOLE_TAG=$GUACAMOLE_TAG_BASE:$VERSION
+GUACAMOLE_TAG_LATEST=$GUACAMOLE_TAG_BASE:latest
 
 docker tag $QUACD $QUACD_TAG
 docker tag $QUACD $QUACD_TAG_LATEST
-docker tag $GIACAMOLE $GIACAMOLE_TAG
-docker tag $GIACAMOLE $GIACAMOLE_TAG_LATEST
+docker tag $GUACAMOLE $GUACAMOLE_TAG
+docker tag $GUACAMOLE $GUACAMOLE_TAG_LATEST
 
 
 # pushing the images
 push $QUACD_TAG
 push $QUACD_TAG_LATEST
-push $GIACAMOLE_TAG
-push $GIACAMOLE_TAG_LATEST
+push $GUACAMOLE_TAG
+push $GUACAMOLE_TAG_LATEST
 
 
 done_push

@@ -65,7 +65,7 @@ gzip -f $TAR_PATH
 is_created=$(ls -l | grep $TAR_NAME | grep gz | wc -l)
 if [ "$is_created"=="1" ];
 then
-    echo "File $GZ_PATH is ready"  
+    echo "File >> $GZ_PATH << is ready"  
 else
     echo "File compression failed!"
     exit 1
