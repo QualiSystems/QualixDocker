@@ -29,7 +29,7 @@ function push {
 }
 
 # build number for the image tag
-VARS=(VERSION)
+VARS=(VERSION DOCKER_USERNAME DOCKER_PASSWORD)
 for _var in "${VARS[@]}";
 do
     echo "check if ${_var} exists"
