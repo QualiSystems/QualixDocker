@@ -66,7 +66,6 @@ if [ "$aws_cli_installation_required" == "1" ]; then
 fi
 
 
-bucket=test-asdasd
 # configure aws cli
 file_name=${file_to_upload##*/}
 aws configure set aws_access_key_id  $AWS_ACCESS_KEY # default_access_key
