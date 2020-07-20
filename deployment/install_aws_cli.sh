@@ -2,6 +2,14 @@
 
 set -e
 
+# check if aws cli already installed on local host
+aws --version > /dev/null
+if [ $? -eq 0 ]; then
+    echo "AWS cli already installed"
+    exit 0
+fi
+
+# installing the clpi
 echo "Install AWS cli"
 
 sudo apt-get update
