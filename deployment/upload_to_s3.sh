@@ -72,12 +72,19 @@ aws configure set aws_access_key_id  $AWS_ACCESS_KEY # default_access_key
 aws configure set aws_secret_access_key $AWS_SECRET # default_secret_key
 aws configure set default.region $REGION # region
 
-aws s3 cp $file_to_upload s3://$BUCKET/$s3_path/$file_name
+# upload to root if path is /
+if [ "$s3_path" == "/" ]; then
+    s3_full_path=$file_name
+else
+    s3_full_path=$s3_path/$file_name
+fi
+
+aws s3 cp $file_to_upload s3://$BUCKET/$s3_full_path
 
 if [ "$?" -ne 0 ]; then
     echoerr "Failed to upload file $file_to_upload to S3"
     exit 1
 fi
 
-echok "File $file_to_upload Uploaded to S3 in path: S3://$BUCKET/$s3_path/$file_name"
+echok "File $file_to_upload Uploaded to S3 in path: S3://$BUCKET/$s3_full_path"
 exit 0
