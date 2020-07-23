@@ -2,7 +2,8 @@
 
 ######################################################
 #
-# env var reqiored: VERSION >> for example 1.4.0.123
+# env var required: VERSION >> for example 1.4.0.123
+# env var optional: SOURCE_HUB >> for example 'qualitesthub'. relevant to finding the IMAGE if it was downloaded from a hub and not built.
 # run the script for example: ./push.sh
 #
 ######################################################
