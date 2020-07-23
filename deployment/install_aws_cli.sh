@@ -3,7 +3,7 @@
 set -e
 
 # check if aws cli already installed on local host
-aws --version > /dev/null
+aws --version > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "AWS cli already installed"
     exit 0
