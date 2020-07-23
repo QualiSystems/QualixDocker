@@ -28,6 +28,12 @@ function push {
     fi
 }
 
+function tag_image {
+    IMAGE_ID=$1
+    TAG=$2
+    docker tag $IMAGE_ID $TAG
+}
+
 # build number for the image tag
 VARS=(VERSION DOCKER_USERNAME DOCKER_PASSWORD)
 for _var in "${VARS[@]}";
@@ -41,9 +47,16 @@ done
 
 echo Using build number: $VERSION
 
-QUACD=qualix_guacd
-GUACAMOLE=qualix_guacamole
+QUACD_BASE=qualix_guacd
+GUACAMOLE_BASE=qualix_guacamole
 
+if [[ -n "$SOURCE_HUB" ]]; then
+    QUACD_ID=docker images $SOURCE_HUB/$QUACD_BASE -q
+    GUACAMOLE_ID=docker images $SOURCE_HUB/$GUACAMOLE_BASE -q
+else
+    QUACD_ID=docker images QUACD_BASE -q
+    GUACAMOLE_ID=docker images GUACAMOLE_BASE -q
+fi
 
 if [ -z "$DOCKER_USERNAME" ]
 then
@@ -56,8 +69,6 @@ then
     DOCKER_PASSWORD=YouPassword
 fi
 
-
-
 # Login to Docker
 echo Login to docker hub with username: $DOCKER_USERNAME
 docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD > /dev/null 2>&1
@@ -67,29 +78,16 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-
 # Tagging the images
-QUACD_TAG_BASE=$DOCKER_USERNAME/$QUACD
-QUACD_TAG=$QUACD_TAG_BASE:$VERSION
-QUACD_TAG_LATEST=$QUACD_TAG_BASE:latest
-GUACAMOLE_TAG_BASE=$DOCKER_USERNAME/$GUACAMOLE
-GUACAMOLE_TAG=$GUACAMOLE_TAG_BASE:$VERSION
-GUACAMOLE_TAG_LATEST=$GUACAMOLE_TAG_BASE:latest
-
-docker tag $QUACD $QUACD_TAG
-docker tag $QUACD $QUACD_TAG_LATEST
-docker tag $GUACAMOLE $GUACAMOLE_TAG
-docker tag $GUACAMOLE $GUACAMOLE_TAG_LATEST
-
+tag_image $QUACD_ID $DOCKER_USERNAME/$QUACD_BASE:$VERSION
+tag_image $QUACD_ID $DOCKER_USERNAME/$QUACD_BASE:latest
+tag_image $GUACAMOLE_ID $DOCKER_USERNAME/$GUACAMOLE_BASE:$VERSION
+tag_image $GUACAMOLE_ID $DOCKER_USERNAME/$GUACAMOLE_BASE:latest
 
 # pushing the images
-push $QUACD_TAG
-push $QUACD_TAG_LATEST
-push $GUACAMOLE_TAG
-push $GUACAMOLE_TAG_LATEST
-
+push $DOCKER_USERNAME/$QUACD_BASE
+push $DOCKER_USERNAME/$GUACAMOLE_BASE
 
 done_push
 docker logout
 exit 0 
-
