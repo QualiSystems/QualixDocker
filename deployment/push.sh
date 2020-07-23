@@ -51,11 +51,11 @@ QUACD_BASE=qualix_guacd
 GUACAMOLE_BASE=qualix_guacamole
 
 if [[ -n "$SOURCE_HUB" ]]; then
-    QUACD_ID=docker images $SOURCE_HUB/$QUACD_BASE -q
-    GUACAMOLE_ID=docker images $SOURCE_HUB/$GUACAMOLE_BASE -q
+    QUACD_ID=$(docker images $SOURCE_HUB/$QUACD_BASE -q)
+    GUACAMOLE_ID=$(docker images $SOURCE_HUB/$GUACAMOLE_BASE -q)
 else
-    QUACD_ID=docker images QUACD_BASE -q
-    GUACAMOLE_ID=docker images GUACAMOLE_BASE -q
+    QUACD_ID=$(docker images $QUACD_BASE -q)
+    GUACAMOLE_ID=$(docker images $GUACAMOLE_BASE -q)
 fi
 
 if [ -z "$DOCKER_USERNAME" ]
