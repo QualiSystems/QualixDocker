@@ -79,7 +79,7 @@ else
     s3_full_path=$s3_path/$file_name
 fi
 
-aws s3 cp $file_to_upload s3://$BUCKET/$s3_full_path
+aws s3 cp $file_to_upload s3://$BUCKET/$s3_full_path --acl public-read
 
 if [ "$?" -ne 0 ]; then
     echoerr "Failed to upload file $file_to_upload to S3"
