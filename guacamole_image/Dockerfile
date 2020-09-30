@@ -1,4 +1,4 @@
-FROM guacamole/guacamole:1.0.0
+FROM guacamole/guacamole:1.2.0
 
 LABEL maintainer="Support@quali.com" url="https://support.quali.com"
 
@@ -7,7 +7,7 @@ ENV GUACAMOLE_HOME /opt/guacamole/.guacamole
 ENV GUACAMOLE_PROPERTIES guacamole.properties
 
 # ARG of the JAR version
-ARG JAR_VERSION=1.0.0
+ENV JAR_VERSION=3.2.0
 ENV VERSION qualix-${JAR_VERSION}
 ENV QUALIX_S3_AUTH_FILE ${VERSION}.tar.gz
 ENV QUALIX_S3_URL https://quali-dev-binaries.s3.amazonaws.com/${QUALIX_S3_AUTH_FILE}
@@ -44,6 +44,7 @@ RUN tar -xzf ${QUALIX_S3_AUTH_FILE}
 
 
 RUN cp guacamole-auth-quali-${JAR_VERSION}/guacamole-auth-quali-${JAR_VERSION}.jar ${GUACAMOLE_HOME}/extensions/
+RUN cp guacamole-auth-quali-${JAR_VERSION}/resources/guacamole-legacy-urls-0.9.9.jar ${GUACAMOLE_HOME}/extensions/
 RUN rm -rf  guacamole-auth-quali-${JAR_VERSION}
 # RUN cp ${QUALIX_AUTH_PACK_NAME}/${QUALIX_AUTH_PACK_NAME}.jar ${GUACAMOLE_HOME}/extensions/
 # RUN rm -r ${QUALIX_AUTH_PACK_NAME}
