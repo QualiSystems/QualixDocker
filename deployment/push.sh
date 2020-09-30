@@ -29,6 +29,15 @@ function push {
     fi
 }
 
+function clean_image {
+    IMAGE=$1
+    docker image rm $IMAGE
+    if [ $? -ne 0 ]; then
+        setError $IMAGE
+        exit 1
+    fi
+}
+
 function tag_image {
     IMAGE_ID=$1
     TAG=$2
@@ -90,5 +99,9 @@ push $DOCKER_USERNAME/$QUACD_BASE
 push $DOCKER_USERNAME/$GUACAMOLE_BASE
 
 done_push
+
+clean_image $DOCKER_USERNAME/$QUACD_BASE
+clean_image $DOCKER_USERNAME/$GUACAMOLE_BASE
+
 docker logout
 exit 0 
