@@ -15,7 +15,7 @@ services:
       - 80:8080
       - 443:8443
     volumes:
-      - files:/etc/guacamole/files
+      - files:/opt/guacamole/.guacamole/files
     networks:
       guacnetwork_compose:
     restart: always
@@ -26,7 +26,7 @@ services:
     ports:
       - 4822:4822
     volumes:
-      - files:/etc/guacamole/files
+      - files:/opt/guacamole/.guacamole/files
     environment:
       - GUACD_LOG_LEVEL=debug
     networks:
