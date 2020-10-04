@@ -1,4 +1,4 @@
-FROM guacamole/guacd:1.0.0
+FROM guacamole/guacd:1.2.0
 
 LABEL maintainer="Support@Quali.com" url="https://support.quali.com"
 

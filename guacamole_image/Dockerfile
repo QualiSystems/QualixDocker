@@ -57,6 +57,8 @@ RUN sed -i '1s|^|'"$redirect"'\n|' /usr/local/tomcat/webapps/ROOT/index.jsp
 
 ######################## Copy configuration ##############################################################################################
 RUN echo "auth-provider: net.sourceforge.guacamole.net.auth.quali.QualiProvider"  > ${GUACAMOLE_HOME}/${GUACAMOLE_PROPERTIES}
+RUN echo "qualix-drive-path: ${GUACAMOLE_HOME}/files/" >> ${GUACAMOLE_HOME}/${GUACAMOLE_PROPERTIES}
+RUN echo "qualix-clean-shared: true" >> ${GUACAMOLE_HOME}/${GUACAMOLE_PROPERTIES}
 RUN mkdir -p ${GUACAMOLE_HOME}/files/
 RUN chmod -R 777 ${GUACAMOLE_HOME}/
 RUN chmod -R 777 ${GUACAMOLE_HOME}/files/
