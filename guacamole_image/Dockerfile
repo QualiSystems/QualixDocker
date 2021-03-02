@@ -8,11 +8,13 @@ ENV GUACAMOLE_PROPERTIES guacamole.properties
 
 # ARG of the JAR version
 ARG JAR_VERSION=3.2.0
-ENV VERSION qualix-${JAR_VERSION}
-ENV QUALIX_S3_AUTH_FILE ${VERSION}.tar.gz
-ENV QUALIX_S3_URL https://quali-dev-binaries.s3.amazonaws.com/${QUALIX_S3_AUTH_FILE}
+ARG BUILD_VERSION=1
+RUN echo ${BUILD_VERSION}
+ENV QUALIX_S3_AUTH_FILE qualix-${BUILD_VERSION}.tar.gz
+ENV S3_BUCKET_URL=https://quali-dev-binaries.s3.amazonaws.com
+ENV QUALIX_S3_URL ${S3_BUCKET_URL}/${QUALIX_S3_AUTH_FILE}
 
-ENV QUALIX_AUTH_PACK_NAME guacamole-auth-quali-${VERSION}
+#ENV QUALIX_AUTH_PACK_NAME guacamole/-auth-quali-${VERSION}
 
 ENV KEYSTORE_PASS 123123
 ENV GUACAMOLE_WAR_NAME remote
@@ -43,9 +45,9 @@ RUN tar -xzf ${QUALIX_S3_AUTH_FILE}
 
 
 
-RUN unzip -o guacamole-auth-quali-${JAR_VERSION}/guacamole-auth-quali-${JAR_VERSION}.jar guacamole-legacy-urls-0.9.9.jar -d ${GUACAMOLE_HOME}/extensions/
-RUN cp guacamole-auth-quali-${JAR_VERSION}/guacamole-auth-quali-${JAR_VERSION}.jar ${GUACAMOLE_HOME}/extensions/
-RUN rm -rf  guacamole-auth-quali-${JAR_VERSION}
+RUN unzip -o guacamole-auth-quali-${BUILD_VERSION}/guacamole-auth-quali-${JAR_VERSION}.jar guacamole-legacy-urls-0.9.9.jar -d ${GUACAMOLE_HOME}/extensions/
+RUN cp guacamole-auth-quali-${BUILD_VERSION}/guacamole-auth-quali-${JAR_VERSION}.jar ${GUACAMOLE_HOME}/extensions/
+RUN rm -rf  guacamole-auth-quali-${BUILD_VERSION}
 # RUN cp ${QUALIX_AUTH_PACK_NAME}/${QUALIX_AUTH_PACK_NAME}.jar ${GUACAMOLE_HOME}/extensions/
 # RUN rm -r ${QUALIX_AUTH_PACK_NAME}
 
