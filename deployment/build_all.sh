@@ -24,7 +24,7 @@ cd - > /dev/null 2>&1
 STEP=quacd
 echo Building $STEP
 cd ../guacd_image
-./build.sh  | tee guacd_image.log
+./build.sh $1| tee guacd_image.log
 if [ $? -ne 0 ]; then
     setError $IMAGE
     exit 1
