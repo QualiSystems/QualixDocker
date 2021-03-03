@@ -27,7 +27,7 @@ done
 
 # build Docker images
 echo "Building docker images..."
-./build_all.sh $1
+./build_all.sh
 docker images
 
 # check docker images exists

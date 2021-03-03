@@ -14,7 +14,7 @@ STEP=guacamole
 echo Building $STEP
 cd ../guacamole_image
 
-./build.sh $1| tee guacamole_image.log
+./build.sh| tee guacamole_image.log
 if [ $? -ne 0 ]; then
     setError $IMAGE
     exit 1
